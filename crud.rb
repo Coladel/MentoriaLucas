@@ -5,14 +5,14 @@ puts
 puts "1 - Criar Post"
 puts "2 - Ler Post"
 puts "3 - Alterar Post"
-puts "4 - Deletar Post" 
+puts "4 - Deletar Post"
 
 
 puts "Informe a opção:"
 opcao = gets.chomp
 
 if opcao == '1'
-	load "Create.rb"
+	load "create.rb"
 end
 
 if opcao == '2'
