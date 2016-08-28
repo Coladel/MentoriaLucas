@@ -2,11 +2,21 @@ require './create'
 require './read'
 require './delete'
 require './update'
-require './main_menu'
 
-menu
+      puts
+      puts 'CRUD do João, Gerencie aqui seus posts'
+      puts
+      puts 'Digite o número referente a opção que deseja utilizar!'
+      puts
+      puts '1 - Criar Post'
+      puts '2 - Ler Post'
+      puts '3 - Alterar Post'
+      puts '4 - Deletar Post'
 
-      if menu == '1'
+      puts 'Informe a opção:'
+      action = gets.chomp
+
+      if action == '1'
         puts 'Digite sua mensagem!'
         message = gets.chomp
         create(message)
@@ -14,7 +24,7 @@ menu
         read_last_one
       end
 
-      if menu == '2'
+      if action == '2'
         puts "Digite o Id referente qual mensagem deseja ler"
         puts "Para ler todas as mensagens digite all"
         id_message = gets.chomp
@@ -25,7 +35,7 @@ menu
             end
       end
 
-      if menu =='3'
+      if action =='3'
         puts "Se deseja atualizar a ultima mensagem digite 0"
         puts "Caso contrário informe o id da mensagem que deseja atualizar"
         id_message = gets.chomp
@@ -46,14 +56,10 @@ menu
             end
       end
 
-      if menu =='4'
+      if action =='4'
         puts "Digite o Id da mensagem que deseja deletar"
         id_message = gets.chomp
-
+        read_individual(id_message)
         delete_post(id_message)
+        puts "Esta mensagem foi deletada!"
       end
-
-puts
-puts "Gostaria de continuar no CRUD? (S ou N)"
-puts
-puts "Obrigado por usar o CRUD do João"
