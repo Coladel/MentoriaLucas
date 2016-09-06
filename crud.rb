@@ -28,24 +28,14 @@ if action == '2'
 end
 
 if action =='3'
-  puts "Se deseja atualizar a ultima mensagem digite 0"
-  puts "Caso contrário informe o id da mensagem que deseja atualizar"
+  puts "Informe o id da mensagem que deseja atualizar"
   id_message = gets.chomp
-  if id_message == '0'
-    read_last_one
-    puts "Digite a nova mensagem para o Post:"
-    message_update = gets.chomp
-    update_last_post(message_update)
-    puts "Confira sua mensagem atualizada!"
-    read_last_one
-  else
-    read_individual(id_message)
-    puts "Digite a nova mensagem para o Post:"
-    message_update = gets.chomp
-    update_choice_post(message_update, id_message)
-    puts "Confira sua mensagem atualizada!"
-    read_individual(id_message)
-  end
+  read_individual(id_message)
+  puts "Digite a nova mensagem para o Post:"
+  message_update = gets.chomp
+  update_choice_post(message_update, id_message)
+  puts "Confira sua mensagem atualizada!"
+  read_individual(id_message)
 end
 
 if action =='4'
