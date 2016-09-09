@@ -4,5 +4,4 @@ source 'https://rubygems.org'
 
 ruby '2.3.1'
 
-
 gem 'pg', '~> 0.18.4'
