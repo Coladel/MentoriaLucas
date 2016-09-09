@@ -1,8 +1,5 @@
-require 'pg'
+require './connectbd'
 
 def delete_post(value)
-  conn = PGconn.connect('localhost', 5432, nil, nil, 'posts', 'postgres', 'mude6363')
-  res = conn.exec("DELETE FROM posts WHERE id = '#{value}'")
-  res.clear
-  conn.close
+  connect_bd_and_exec("DELETE FROM posts WHERE id = '#{value}'")
 end
