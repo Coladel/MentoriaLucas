@@ -1,9 +1,7 @@
 # frozen_string_literal: true
-# A sample Gemfile
-source "https://rubygems.org"
- ruby  '2.3.1'
 
+source 'https://rubygems.org'
 
-gem 'pg'
+ruby '2.3.1'
 
-# gem "rails"
+gem 'pg', '~> 0.18.4'
