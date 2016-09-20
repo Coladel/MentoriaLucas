@@ -1,12 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    dotenv (2.1.1)
     pg (0.18.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv (~> 2.1, >= 2.1.1)
   pg (~> 0.18.4)
 
 RUBY VERSION
