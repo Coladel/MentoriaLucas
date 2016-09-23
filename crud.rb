@@ -1,3 +1,4 @@
+require './post_db'
 require './post'
 require './menu'
 
@@ -5,11 +6,17 @@ menu
 action = gets.chomp
 
 if action == '1'
-  puts 'Digite sua mensagem!'
-  message = gets.chomp
-  Post.create(message)
-  puts 'Veja sua mensagem postada'
-  Post.read_last_one
+  puts 'Digite seu post:'
+  param_text = gets.chomp
+
+  post = Post.new
+  post.text = param_text
+  post.create
+
+  puts "Ultimo post cadastrado:"
+  last_post = Post.read_last_one
+
+  puts last_post.text
 end
 
 if action == '2'
