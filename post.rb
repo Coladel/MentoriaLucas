@@ -1,27 +1,23 @@
-require './connectbd'
+require './post_db'
 
 class Post
-  def self.create(value)
-    connect_bd_and_exec("INSERT INTO posts(post) VALUES('#{value}')")
+  def text=(value)
+    @text = value
   end
 
-  def self.delete(value)
-    connect_bd_and_exec("DELETE FROM posts WHERE id = '#{value}'")
+  def text
+    @text
   end
 
-  def self.update(value, message_id)
-    connect_bd_and_exec("UPDATE posts SET post = '#{value}' WHERE id = '#{message_id}'")
-  end
-
-  def self.read_individual(value)
-    connect_bd_and_exec("SELECT post FROM posts WHERE id = #{value}")
-  end
-
-  def self.read_all
-    connect_bd_and_exec('SELECT * FROM posts')
+  def create
+    connect_bd_and_exec("INSERT INTO posts(text) VALUES('#{text}')")
   end
 
   def self.read_last_one
-    connect_bd_and_exec('SELECT * FROM posts ORDER BY id DESC LIMIT 1')
+    result = PostDb.read_last_one
+
+    post = new
+    post.text = result.first['text'] # {"text" => "textooo"}
+    post
   end
 end
