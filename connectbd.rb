@@ -8,4 +8,4 @@ def connect_bd_and_exec(sql_command)
   result = conn.exec_prepared 'user_action'
   conn.close
   result
-  end
+end
