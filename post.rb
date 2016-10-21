@@ -21,24 +21,41 @@ def id=(value)
     connect_bd_and_exec("INSERT INTO posts(message) VALUES('#{text}')")
   end
 
-  def read_last_one
-    connect_bd_and_exec("SELECT * FROM posts ORDER BY id DESC LIMIT 1")
+  def self.read_last_one
+    result = connect_bd_and_exec("SELECT * FROM posts ORDER BY id DESC LIMIT 1")
+
+    post = new
+    post.text = result.first['message']
+    post
   end
 
-  def read_individual(value)
-    connect_bd_and_exec("SELECT * FROM posts WHERE id = #{value}")
+  def self.read_individual(value)
+    result = connect_bd_and_exec("SELECT * FROM posts WHERE id = #{value}")
+
+    post = new
+    post.id = result.first['id']
+    post.text = result.first['message']
+    post
+
   end
 
-  def read_all
-    connect_bd_and_exec('SELECT * FROM posts')
+  def self.read_all
+    result = connect_bd_and_exec('SELECT * FROM posts')
+    posts = []
+    result.each do |row|
+      post = new
+      post.text = row['message']
+      posts << post
+    end
+    posts
   end
 
-  def update(value, message_id)
-    connect_bd_and_exec("UPDATE posts SET message = '#{value}' WHERE id = '#{message_id}'")
+  def update
+    connect_bd_and_exec("UPDATE posts SET message = '#{text}' WHERE id = '#{id}'")
   end
 
-  def delete(value)
-    connect_bd_and_exec("DELETE FROM posts WHERE id = '#{value}'")
+  def delete
+    connect_bd_and_exec("DELETE FROM posts WHERE id = '#{id}'")
   end
 
 end
