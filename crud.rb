@@ -1,4 +1,3 @@
-require './post_db'
 require './post'
 require './menu'
 
@@ -14,37 +13,47 @@ if action == '1'
   post.create
 
   puts "Ultimo post cadastrado:"
-  last_post = Post.read_last_one
-
-  puts last_post.text
+  post =  Post.read_last_one
+  puts post.text
 end
 
 if action == '2'
   puts 'Digite o Id referente qual mensagem deseja ler'
   puts 'Para ler todas as mensagens digite all'
-  id_message = gets.chomp
-  if id_message  == 'all'
-    Post.read_all
+  post_id_or_all = gets.chomp
+
+  if post_id_or_all  == 'all'
+    Post.read_all.each do |post|
+      puts post.text
+    end
   else
-    Post.read_individual(id_message)
+    post = Post.read_individual(post_id_or_all)
+    puts post.text
   end
 end
 
 if action == '3'
   puts 'Informe o id da mensagem que deseja atualizar'
-  id_message = gets.chomp
-  Post.read_individual(id_message)
+  post_id = gets.chomp
+
+  post = Post.read_individual(post_id)
+
   puts 'Digite a nova mensagem para o Post:'
   message_update = gets.chomp
-  Post.update(message_update, id_message)
+
+  post.text = message_update
+  post.update
+
   puts 'Confira sua mensagem atualizada!'
-  Post.read_individual(id_message)
+  up_post = Post.read_individual(post_id)
+  puts up_post.text
 end
 
 if action == '4'
   puts 'Digite o Id da mensagem que deseja deletar'
   id_message = gets.chomp
-  Post.read_individual(id_message)
-  Post.delete(id_message)
+
+  post = Post.read_individual(id_message)
+  post.delete
   puts 'Esta mensagem foi deletada!'
 end
