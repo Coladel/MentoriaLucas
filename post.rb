@@ -1,6 +1,11 @@
-require './post_db'
+require './connectbd'
 
 class Post
+  def initialize(attrs={})
+       @id = attrs[:id]
+       @text = attrs[:text]
+  end
+
   def text=(value)
     @text = value
   end
@@ -9,15 +14,46 @@ class Post
     @text
   end
 
+  def id
+    @id
+  end
+
+  def self.posts
+    DB[:posts].is
+  end
+
+  def self.read_all
+    ds = posts
+    ds.each do |row|
+      p row
+    end
+  end
+
+  def self.read_individual(value)
+    post_hash = posts.where(id: value).first
+    new(id: post_hash[:id], text: post_hash[:message])
+end
+
   def create
-    connect_bd_and_exec("INSERT INTO posts(text) VALUES('#{text}')")
+    post = posts.insert(:message => text)
+    post
   end
 
   def self.read_last_one
-    result = PostDb.read_last_one
-
-    post = new
-    post.text = result.first['text'] # {"text" => "textooo"}
-    post
+    ds = posts.order(Sequel.desc(:id)).limit(1)
+    ds.each do |row|
+      p row
+    end
   end
+
+  def update
+    ds = posts.where(:id => id).update(:message => text)
+    ds
+  end
+
+  def delete
+    ds = posts.where(:id => id).delete
+    ds
+  end
+
 end

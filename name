@@ -1,0 +1,7 @@
+name = 'joao'
+
+name_new = name
+
+name = 'lucas'
+
+puts name_new

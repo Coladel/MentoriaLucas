@@ -1,11 +1,11 @@
-require 'pg'
+require 'sequel'
 require 'dotenv'
+
 Dotenv.load
 
-def connect_bd_and_exec(sql_command)
-  conn = PGconn.connect(ENV['DB_HOST'], ENV['DB_PORT'], nil, nil, ENV['DB_NAME'], ENV['DB_USER'], ENV['DB_PASSWORD'])
-  result = conn.exec("#{sql_command}")
-  conn.close
+DB = Sequel.connect(adapter: 'postgres',
+                                  host: ENV['DB_HOST'],
+                                  database: ENV['DB_NAME'],
+                                  user: ENV['DB_USER'],
+                                  password: ENV['DB_PASSWORD'])
 
-  result
-end
