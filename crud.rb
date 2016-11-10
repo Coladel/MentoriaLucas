@@ -37,18 +37,17 @@ if action == '3'
   puts 'Informe o id da mensagem que deseja atualizar'
   post_id = gets.chomp
 
-  post = Post.read_individual(post_id)
+  #post = Post.read_individual(post_id)
 
   puts 'Digite a nova mensagem para o Post:'
   message_update = gets.chomp
 
-  post = Post.new
-  post.text = message_update
-  post.id = post_id
+  post = Post.new(id: post_id, text: message_update)
   post.update
 
   puts 'Confira sua mensagem atualizada!'
-  up_post = Post.read_individual(post_id)
+  read_post = Post.read_individual(post_id)
+  puts read_post.inspect
   #puts up_post.text
 end
 

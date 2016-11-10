@@ -19,7 +19,7 @@ class Post
   end
 
   def self.posts
-    DB[:posts].is
+    DB[:posts]
   end
 
   def self.read_all
@@ -35,8 +35,8 @@ class Post
 end
 
   def create
-    post = posts.insert(:message => text)
-    post
+    ds = DB[:posts].insert(:message => text)
+    ds
   end
 
   def self.read_last_one
@@ -47,12 +47,12 @@ end
   end
 
   def update
-    ds = posts.where(:id => id).update(:message => text)
+    ds = DB[:posts].where(:id => id).update(:message => text)
     ds
   end
 
   def delete
-    ds = posts.where(:id => id).delete
+    ds = DB[:posts].where(:id => id).delete
     ds
   end
 
